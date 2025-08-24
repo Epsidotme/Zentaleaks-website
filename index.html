@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZENTAKA // INTERNAL DISCLOSURE LEAKS</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#0A0A0A',
+            neonred: '#FF1A1A',
+            textp: '#E6E6E6',
+            meta: '#8A8A8A',
+            panel: '#151515',
+            edge: 'rgba(255,26,26,0.55)',
+            amber: '#FFB300',
+            cyan: '#00E5FF'
+          },
+          boxShadow: {
+            neon: '0 0 1px rgba(255,26,26,0.45), 0 0 8px rgba(255,26,26,0.35), inset 0 0 8px rgba(255,26,26,0.15)'
+          },
+          fontFamily: {
+            display: ['VOIDLINE', 'ui-sans-serif', 'system-ui'],
+            body: ['ShareTechMono', 'ui-monospace', 'monospace'],
+            mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          },
+          keyframes: {
+            glitch: {
+              '0%, 100%': { transform: 'translate(0,0)' },
+              '20%': { transform: 'translate(-0.5px, 0.4px)' },
+              '40%': { transform: 'translate(0.6px, -0.3px)' },
+              '60%': { transform: 'translate(-0.3px, 0.2px)' },
+              '80%': { transform: 'translate(0.3px, -0.4px)' }
+            },
+            scan: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100%)' }
+            },
+            ticker: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          },
+          animation: {
+            glitch: 'glitch 220ms steps(2, end) infinite',
+            scan: 'scan 5s linear infinite',
+            ticker: 'ticker 20s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @font-face { font-family: 'VOIDLINE'; src: url('assets/fonts/19VOIDLINE.ttf') format('truetype'); font-weight: normal; font-style: normal; }
+    @font-face { font-family: 'ShareTechMono'; src: url('assets/fonts/ShareTechMono-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; }
+    body { font-family: 'ShareTechMono', ui-monospace, monospace; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'VOIDLINE', ui-sans-serif, system-ui; letter-spacing: 0.05em; }
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 0.9rem; }
+    h5 { font-size: 1.5rem; }
+    h6 { font-size: 1.25rem; }
+    /* Subtle scanlines overlay */
+    .scanlines::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 2px, transparent 3px); mix-blend-mode: overlay; }
+    @media (prefers-reduced-motion: reduce) { .animate-glitch{animation:none!important;} .animate-scan{animation:none!important;} .animate-ticker{animation:none!important;} }
+  </style>
+</head>
+<body class="bg-background text-textp font-body min-h-screen relative">
+  <!-- Top System Banner -->
+  <header class="border-b border-neutral-800/70 bg-panel/70 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between py-3">
+        <div class="flex items-baseline gap-3">
+          <h1 class="tracking-widest text-white text-lg sm:text-xl">ZENTALEAKS</h1>
+          <span class="text-meta text-xs sm:text-sm">// INTERNAL DISCLOSURE LEAKS</span>
+        </div>
+        <div class="text-[10px] sm:text-xs text-meta">Build: Z-INDEX • Channel: leak-arch</div>
+      </div>
+    </div>
+    <!-- Warning ticker -->
+    <div class="overflow-hidden border-t border-neutral-800/70">
+      <div class="whitespace-nowrap animate-ticker flex">
+        <div class="shrink-0 pr-10 py-1 text-[11px]">⚠️ CONFIDENTIAL — Unauthorized Distribution Prohibited.</div>
+        <div class="shrink-0 pr-10 py-1 text-[11px]">Verify artifact integrity prior to citation.</div>
+        <div class="shrink-0 pr-10 py-1 text-[11px]">System Notice: Monitoring endpoints degraded.</div>
+        <div class="shrink-0 pr-10 py-1 text-[11px]">Checksum mismatch results in discard.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero / Intro -->
+  <section class="relative">
+    <div class="absolute inset-0 opacity-20 blur-3xl" aria-hidden>
+      <div class="w-1/2 h-1/2 bg-[radial-gradient(circle_at_center,rgba(255,26,26,0.25),transparent_60%)]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 py-10">
+      <div class="relative rounded-2xl border border-neutral-800/70 bg-panel/60 shadow-neon overflow-hidden">
+        <div class="absolute inset-0 scanlines animate-scan"></div>
+        <div class="relative p-6 md:p-10">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-[10px] uppercase tracking-widest text-meta">// Gate</span>
+            <span class="h-px w-10 bg-neutral-700"></span>
+            <span class="text-[10px] uppercase tracking-widest text-amber">Disclosure Channel</span>
+          </div>
+          <h2 class="text-white leading-tight">INTERNAL DISCLOSURE ARCHIVE</h2>
+          <p class="mt-3 max-w-2xl text-sm text-meta">This repository mirrors materials labeled Confidential or above. Distribution outside authorized channels is prohibited. Verify artifact integrity prior to citation.</p>
+          <div class="mt-6 flex items-center gap-4">
+            <a href="#archive" class="relative px-4 py-2 rounded-md border border-neonred/70 text-white hover:shadow-neon transition duration-200">
+              <span class="relative z-10 tracking-wide text-xs">ENTER ARCHIVE</span>
+              <span class="absolute inset-0 bg-neonred/10 rounded-md"></span>
+            </a>
+            <div class="text-[10px] text-meta">Build Ref: ZTK-ARCH-001</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Archive Grid -->
+  <main id="archive" class="max-w-7xl mx-auto px-4 pb-16">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <h3 class="text-white">Evidence Library</h3>
+        <span class="text-[10px] text-meta">/ Experiments / Surveillance / Compliance / Incidents</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <label class="text-[10px] text-meta">Filter</label>
+        <select id="categoryFilter" class="bg-panel border border-neutral-800/70 text-xs rounded px-2 py-1 outline-none focus:ring-2 focus:ring-neonred/60">
+          <option>All</option>
+          <option>Experiments</option>
+          <option>Surveillance</option>
+          <option>Compliance</option>
+          <option>Incidents</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- SAMPLE PDF CARD -->
+      <article data-category="Experiments" class="relative rounded-xl border border-neutral-800/70 bg-panel/70 p-4 hover:shadow-neon transition duration-200 group">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-[10px] uppercase tracking-widest text-meta">ZTK-RND-20250322-014</div>
+            <h4 class="mt-1 text-white font-semibold leading-snug">Subject Response to Multi‑Modal Sensory Load (v3)</h4>
+          </div>
+          <span class="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded border border-neonred/60 text-neonred">PDF</span>
+        </header>
+        <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+          <div>
+            <dt class="text-meta">Origin</dt>
+            <dd>R&D / Bio‑Sync</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Date</dt>
+            <dd>2093-03-22</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Category</dt>
+            <dd>Experiments</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Size</dt>
+            <dd>122 KB</dd>
+          </div>
+        </dl>
+        <div class="mt-4 border-t border-neutral-800/70 pt-3">
+          <div class="text-[10px] text-meta">SHA‑256</div>
+          <div class="flex items-center gap-2 mt-1">
+            <code id="sha1" class="select-all break-all text-[11px]">9f27a2e8c913f0e072a9b58e21b3f122d9e0ac67e2f34b0d7180ab23b1</code>
+            <button data-copy="sha1" class="ml-auto text-[10px] px-2 py-1 rounded border border-neutral-700 hover:border-neonred/60 hover:text-white text-meta transition">Copy</button>
+          </div>
+        </div>
+        <footer class="mt-4 flex items-center gap-3">
+          <a href="#" data-open-pdf data-src="assets/pdfs/ZTK-RND-20250322-014.pdf" class="relative inline-flex items-center gap-2 px-3 py-2 text-xs rounded border border-neonred/70 text-white hover:shadow-neon transition">
+            <span class="i">👁</span>
+            <span>Open inline</span>
+          </a>
+          <a href="assets/pdfs/ZTK-RND-20250322-014.pdf" download class="text-xs text-meta hover:text-white">Download</a>
+        </footer>
+        <span class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-transparent group-hover:ring-neonred/30"></span>
+      </article>
+
+      <article data-category="Surveillance" class="relative rounded-xl border border-neutral-800/70 bg-panel/70 p-4 hover:shadow-neon transition duration-200">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-[10px] uppercase tracking-widest text-meta">ZTK-SV-20241203-007</div>
+            <h4 class="mt-1 text-white font-semibold leading-snug">Sentinel Vision: Flagging Criteria — Level 3 (REV‑7)</h4>
+          </div>
+          <span class="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded border border-neonred/60 text-neonred">PDF</span>
+        </header>
+        <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+          <div>
+            <dt class="text-meta">Origin</dt>
+            <dd>Surveillance / Analytics</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Date</dt>
+            <dd>2090-12-03</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Category</dt>
+            <dd>Surveillance</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Size</dt>
+            <dd>124 KB</dd>
+          </div>
+        </dl>
+        <div class="mt-4 border-t border-neutral-800/70 pt-3">
+          <div class="text-[10px] text-meta">SHA‑256</div>
+          <div class="flex items-center gap-2 mt-1">
+            <code id="sha2" class="select-all break-all text-[11px]">2c1e7f4a8bce23f715e0b9c3ed41e1db79a312d5865ed0d274efaa4e90</code>
+            <button data-copy="sha2" class="ml-auto text-[10px] px-2 py-1 rounded border border-neutral-700 hover:border-neonred/60 hover:text-white text-meta transition">Copy</button>
+          </div>
+        </div>
+        <footer class="mt-4 flex items-center gap-3">
+          <a href="#" data-open-pdf data-src="assets/pdfs/ZTK-SV-20241203-007.pdf" class="relative inline-flex items-center gap-2 px-3 py-2 text-xs rounded border border-neonred/70 text-white hover:shadow-neon transition">
+            <span class="i">👁</span>
+            <span>Open inline</span>
+          </a>
+          <a href="assets/pdfs/ZTK-SV-20241203-007.pdf" download class="text-xs text-meta hover:text-white">Download</a>
+        </footer>
+      </article>
+
+      <article data-category="Compliance" class="relative rounded-xl border border-neutral-800/70 bg-panel/70 p-4 hover:shadow-neon transition duration-200">
+        <header class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-[10px] uppercase tracking-widest text-meta">ZTK-CPL-20250114-003</div>
+            <h4 class="mt-1 text-white font-semibold leading-snug">Compliance Review — Aegis Loyalty Protocol Exceptions</h4>
+          </div>
+          <span class="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded border border-neonred/60 text-neonred">PDF</span>
+        </header>
+        <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+          <div>
+            <dt class="text-meta">Origin</dt>
+            <dd>Compliance / Legal</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Date</dt>
+            <dd>2095-01-14</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Category</dt>
+            <dd>Compliance</dd>
+          </div>
+          <div>
+            <dt class="text-meta">Size</dt>
+            <dd>114 KB</dd>
+          </div>
+        </dl>
+        <div class="mt-4 border-t border-neutral-800/70 pt-3">
+          <div class="text-[10px] text-meta">SHA‑256</div>
+          <div class="flex items-center gap-2 mt-1">
+            <code id="sha3" class="select-all break-all text-[11px]">f1bd27cae1d9931f0a77a81c77a2cda4f0b1000fbb11356b0e9a0d0f7c</code>
+            <button data-copy="sha3" class="ml-auto text-[10px] px-2 py-1 rounded border border-neutral-700 hover:border-neonred/60 hover:text-white text-meta transition">Copy</button>
+          </div>
+        </div>
+        <footer class="mt-4 flex items-center gap-3">
+          <a href="#" data-open-pdf data-src="assets/pdfs/ZTK-CPL-20250114-003.pdf" class="relative inline-flex items-center gap-2 px-3 py-2 text-xs rounded border border-neonred/70 text-white hover:shadow-neon transition">
+            <span class="i">👁</span>
+            <span>Open inline</span>
+          </a>
+          <a href="assets/pdfs/ZTK-CPL-20250114-003.pdf" download class="text-xs text-meta hover:text-white">Download</a>
+        </footer>
+      </article>
+
+	  <article data-category="Incidents" class="relative rounded-xl border border-neutral-800/70 bg-panel/70 p-4 hover:shadow-neon transition duration-200">
+  <header class="flex items-start justify-between gap-3">
+    <div>
+      <div class="text-[10px] uppercase tracking-widest text-meta">ZTK-INC-2091-1019-221</div>
+      <h4 class="mt-1 text-white font-semibold leading-snug">
+        Incident Report — Kabuki Transit Hub Neutralization (2091)
+      </h4>
+    </div>
+    <span class="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded border border-neonred/60 text-neonred">PDF</span>
+  </header>
+
+  <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+    <div>
+      <dt class="text-meta">Origin</dt>
+      <dd>Internal Security / Risk Containment (Watson — Kabuki)</dd>
+    </div>
+    <div>
+      <dt class="text-meta">Date</dt>
+      <dd>2091-10-19</dd>
+    </div>
+    <div>
+      <dt class="text-meta">Category</dt>
+      <dd>Incidents</dd>
+    </div>
+    <div>
+      <dt class="text-meta">Size</dt>
+      <dd>101 KB</dd>
+    </div>
+  </dl>
+
+  <div class="mt-4 border-t border-neutral-800/70 pt-3">
+    <div class="text-[10px] text-meta">SHA-256</div>
+    <div class="flex items-center gap-2 mt-1">
+      <code id="sha_inc_20911019" class="select-all break-all text-[11px]">
+        129781fe51f4a3b2d174baf9830bd9b556a4383a8f2c892b3894eac6e44436f8
+      </code>
+      <button data-copy="sha_inc_20911019" class="ml-auto text-[10px] px-2 py-1 rounded border border-neutral-700 hover:border-neonred/60 hover:text-white text-meta transition">
+        Copy
+      </button>
+    </div>
+  </div>
+
+  <footer class="mt-4 flex items-center gap-3">
+    <a href="#" data-open-pdf data-src="assets/pdfs/ZTK-INC-2091-1019-221.pdf" class="relative inline-flex items-center gap-2 px-3 py-2 text-xs rounded border border-neonred/70 text-white hover:shadow-neon transition">
+      <span class="i">👁</span>
+      <span>Open inline</span>
+    </a>
+    <a href="assets/pdfs/ZTK-INC-2091-1019-221.pdf" download class="text-xs text-meta hover:text-white">Download</a>
+  </footer>
+</article>
+
+    </div>
+  </main>
+
+  <!-- INLINE PDF VIEWER MODAL -->
+  <div id="pdfModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70" data-close-pdf></div>
+    <div class="relative max-w-6xl mx-auto mt-10 mb-6 bg-panel/95 border border-neutral-800/70 rounded-xl shadow-neon">
+      <div class="flex items-center justify-between px-4 py-2 border-b border-neutral-800/70">
+        <div class="text-[11px] text-meta">Inline Viewer — Verify checksum before citation</div>
+        <button class="text-[10px] px-2 py-1 rounded border border-neutral-700 hover:border-neonred/60 hover:text-white text-meta" data-close-pdf>Close</button>
+      </div>
+      <div class="px-2 pb-2">
+        <iframe id="pdfFrame" class="w-full h-[80vh] rounded-b-xl" src="" title="PDF Viewer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-neutral-800/70 bg-panel/70">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-[11px] text-meta flex items-center justify-between">
+      <div>© ZENTAKA // Disclosure Index</div>
+      <div class="flex items-center gap-2">
+        <span class="text-cyan">System:</span>
+        <span>v0.1.1</span>
+        <span class="mx-2">•</span>
+        <span class="text-amber">Channel:</span>
+        <span>leak-arch</span>
+      </div>
+    </div>
+  </footer>
+<script>
+  (function () {
+    const filterEl = document.getElementById('categoryFilter');
+    const cards = Array.from(document.querySelectorAll('[data-category]'));
+    const emptyState = document.getElementById('emptyState');
+
+    function applyFilter() {
+      const selected = (filterEl?.value || 'All').toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cat = (card.dataset.category || '').toLowerCase();
+        const show = selected === 'all' || cat === selected;
+        card.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount !== 0);
+      }
+    }
+
+    // Run once on load and whenever the filter changes
+    if (filterEl) {
+      applyFilter();
+      filterEl.addEventListener('change', applyFilter);
+    }
+  })();
+</script>
+
+  <script>
+    // Copy-to-clipboard for checksum buttons
+    document.addEventListener('click', (e) => {
+      const copyBtn = e.target.closest('[data-copy]');
+      if (copyBtn) {
+        const id = copyBtn.getAttribute('data-copy');
+        const el = document.getElementById(id);
+        if (!el) return;
+        const text = el.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+          const original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
+          copyBtn.classList.add('border-neonred/70');
+          setTimeout(() => { copyBtn.textContent = original; }, 1200);
+        }).catch(() => {
+          copyBtn.textContent = 'Failed';
+          setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1200);
+        });
+        return;
+      }
+
+      const openBtn = e.target.closest('[data-open-pdf]');
+      if (openBtn) {
+        e.preventDefault();
+        const src = openBtn.getAttribute('data-src');
+        const frame = document.getElementById('pdfFrame');
+        const modal = document.getElementById('pdfModal');
+        if (frame && modal && src) {
+          frame.src = src;
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+        return;
+      }
+
+      const closeBtn = e.target.closest('[data-close-pdf]');
+      if (closeBtn) {
+        closePdf();
+      }
+    });
+
+    function closePdf() {
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      if (modal) modal.classList.add('hidden');
+      if (frame) frame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePdf();
+    });
+  </script>
+</body>
+</html>
