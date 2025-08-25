@@ -136,8 +136,88 @@
           <h1 class="tracking-widest text-white text-lg sm:text-xl">ZENTALEAKS</h1>
           <span class="text-meta text-xs sm:text-sm">// INTERNAL DISCLOSURE LEAKS</span>
         </div>
-        <div class="text-[10px] sm:text-xs text-meta">Build: Z-INDEX • Channel: leak-arch</div>
+       <!-- ZENTALEAKS → ZENTAKA interstitial (paste inside <header>) -->
+<a id="zl-corp-link" href="https://www.zentaka.com/?ref=zentaleaks&ctx=exposed"
+   rel="noopener noreferrer"
+   style="display:inline-flex;align-items:center;gap:.5rem;padding:.25rem .5rem;border-radius:.5rem;border:1px solid rgba(248,113,113,.5);color:#f87171;text-decoration:none;font:12px/1.1 'ShareTechMono',ui-monospace,monospace;background:linear-gradient(to right,rgba(248,113,113,.08),transparent);">
+  <span aria-hidden="true">🎯</span>
+  <span>Target: Zentaka (official site)</span>
+</a>
+
+<script>
+(() => {
+  const ACCENT = "#FF1A1A"; // Zentaleaks neon red
+  const link = document.getElementById("zl-corp-link");
+  const target = link?.getAttribute("href");
+
+  function makeModal() {
+    const wrap = document.createElement("div");
+    wrap.id = "zl-interstitial";
+    wrap.role = "dialog";
+    wrap.setAttribute("aria-modal","true");
+    wrap.setAttribute("aria-labelledby","zl-title");
+    wrap.style.cssText = `
+      position:fixed;inset:0;z-index:2147483647;display:none;
+      font: 12px/1.45 'ShareTechMono', ui-monospace, monospace;
+    `;
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.72)"></div>
+      <div style="
+          position:relative;max-width:560px;margin:10vh auto 0 auto;
+          background:rgba(10,10,10,.96);border:1px solid rgba(255,26,26,.45);
+          border-radius:12px;box-shadow:0 0 16px rgba(255,26,26,.28), inset 0 0 10px rgba(255,26,26,.12);
+          color:#E6E6E6;overflow:hidden;">
+        <div style="padding:12px;border-bottom:1px solid rgba(255,255,255,.06);
+                    background:linear-gradient(to right, rgba(255,26,26,.10), transparent);
+                    display:flex;align-items:center;gap:8px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:${ACCENT};box-shadow:0 0 10px ${ACCENT}"></div>
+          <h3 id="zl-title" style="margin:0;font:700 14px/1.2 'SDDystopian', sans-serif;letter-spacing:.06em;">
+            Redirect Notice
+          </h3>
+        </div>
+        <div style="padding:14px;">
+          <p style="margin:0 0 8px;color:#fda4af;">You’re navigating to an official Zentaka domain.</p>
+          <p style="margin:0 0 12px;color:#cbd5e1;">
+            Destination: <span style="color:#fff">zentaka.com</span> — the subject of these disclosures.
+            Expect curated narratives and denial of wrongdoing.
+          </p>
+          <p style="margin:0;color:#94a3b8;">Proceed to compare claims with our leaked records.</p>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.06);">
+          <button id="zl-cancel" style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:transparent;color:#E6E6E6;cursor:pointer;">Stay on Zentaleaks</button>
+          <a id="zl-continue" href="${target}" rel="noopener noreferrer"
+             style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,26,26,.6);color:#ff8080;background:transparent;text-decoration:none;cursor:pointer;">Continue to Zentaka</a>
+        </div>
       </div>
+    `;
+    document.body.appendChild(wrap);
+    return wrap;
+  }
+
+  const modal = makeModal();
+  const shade = modal.firstElementChild;
+
+  function open(e){
+    e?.preventDefault();
+    modal.style.display = "block";
+    modal.querySelector("#zl-continue").focus();
+    document.addEventListener("keydown", onKey);
+  }
+  function close(){
+    modal.style.display = "none";
+    link.focus();
+    document.removeEventListener("keydown", onKey);
+  }
+  function onKey(ev){ if (ev.key === "Escape") close(); }
+
+  link?.addEventListener("click", open);
+  shade?.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target && e.target.id === "zl-cancel") close();
+  });
+})();
+</script>
+
     </div>
     <!-- Warning ticker -->
     <div class="overflow-hidden border-t border-neutral-800/70">
